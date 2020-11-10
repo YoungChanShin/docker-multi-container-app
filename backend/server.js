@@ -1,7 +1,6 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const db = require("./db")
-a:link
 const app = express()
 
 app.use(bodyParser.json())
@@ -12,6 +11,10 @@ db.pool.query(`CREATE TABLE lists (
     PRIMARY KEY (id)
 )`, (err, results, fields)=>{
     console.log("result", results)
+})
+
+app.get("/api/hi", function(req,res){
+    return res.json({result:"success"})
 })
 app.get("/api/values",function(req,res){
     db.pool.query("SELECT * FROM lists;",

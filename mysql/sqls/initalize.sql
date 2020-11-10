@@ -7,4 +7,4 @@ CREATE TABLE lists (
     id INTEGER AUTO_INCREAMENT,
     value TEXT,
     PRIMARY KEY (id)
-)
+);
