@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   frontend:
     build:
@@ -9,16 +9,16 @@ services:
       - ./frontend:/app
     stdin_open: true
 
-  nginx:
+  nginx: 
     restart: always
     build:
       dockerfile: Dockerfile
       context: ./nginx
-    ports:
-      - '3000:80'
+    ports: 
+      - "3000:80"
 
   backend:
-    build:
+    build: 
       dockerfile: Dockerfile.dev
       context: ./backend
     container_name: app_backend

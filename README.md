@@ -151,3 +151,7 @@ bucket_name: 소스코드를 s3에 넣은 다음 배포하는 곳에 넣어주�
 ### trial2
 
 `.travis.yml`파일의 aws_access_key의 indent를 수정했다. ==> 같은 에러 발생
+
+### trial3
+
+frontend의 Dockerfile의 오타를 수정했다. ==> 같은 에러 발생
