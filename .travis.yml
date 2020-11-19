@@ -14,11 +14,10 @@ script:
 after_success:
    - docker build -t chan8149/docker-frontend ./frontend
    - docker build -t chan8149/docker-backend ./backend
-   - docker build -f chan8149/docker-nginx ./nginx
+   - docker build -t chan8149/docker-nginx ./nginx
 
    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
    - docker push chan8149/docker-frontend
    - docker push chan8149/docker-backend
    - docker push chan8149/docker-nginx
-   

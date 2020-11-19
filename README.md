@@ -45,3 +45,8 @@ mysql의 데이터는 호스트 파일 시스템의 `/mysql/mysql_data`에 저�
 
 ## docker-compose.yml
 
+```bash
+$ docker-compose up --build
+```
+
+위 명령으로 실행시킨다.
