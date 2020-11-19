@@ -1,5 +1,5 @@
 {
-    "AWSEBDockerrunversion": 2,
+    "AWSEBDockerrunVersion": 2,
     "containerDefinitions": [
         {
             "name": "frontend",
