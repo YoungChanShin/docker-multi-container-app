@@ -27,7 +27,7 @@
                     "containerPort": 80
                 }
             ],
-            "link": [
+            "links": [
                 "frontend",
                 "backend"
             ]
