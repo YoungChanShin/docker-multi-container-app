@@ -4,7 +4,7 @@ CREATE DATABASE myapp;
 USE myapp;
 
 CREATE TABLE lists (
-    id INTEGER AUTO_INCREAMENT,
-    value TEXT,
-    PRIMARY KEY (id)
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  value VARCHAR(10) DEFAULT NULL,
+  PRIMARY KEY (id)
 );
