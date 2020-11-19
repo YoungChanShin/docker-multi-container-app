@@ -50,3 +50,104 @@ $ docker-compose up --build
 ```
 
 위 명령으로 실행시킨다.
+
+
+
+## dockerrun.aws.json
+
+```json
+{
+    "AWSEBDockerrunversion": 2,
+    "containerDefinitions": [
+        {
+            "name": "frontend",
+            "image": "chan8149/docker-frontend",
+            "hostname": "frontend",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "backend",
+            "image": "chan8149/docker-backend",
+            "hostname": "backend",
+            "essential": false,
+            "memory": 128
+        },
+        {
+            "name": "nginx",
+            "image": "chan8149/docker-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "memory": 128,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "link": [
+                "frontend",
+                "backend"
+            ]
+        }
+    ]
+}
+```
+
+`essential`:
+
+`link`
+
+
+
+## VPC
+
+virtual private cloud. 
+
+## RDS
+
+비밀번호: qkrwhdwo(박종재)
+
+
+
+## security Group(방화벽)
+
+
+
+## travis-ci
+
+provider : 외부 서비스 표시- elastic beanstalk
+
+region :지역
+
+bucket_name: 소스코드를 s3에 넣은 다음 배포하는 곳에 넣어주기 때문이다.
+
+
+
+## 배포 에러 1
+
+```json
+// DockerrunVersion:2 에서 V를 소문자로 써서 최초에러 발생
+```
+
+에러 메세지
+
+| 2020-11-19 18:02:51 UTC+0900 | ERROR | Failed to deploy application.                                |
+| ---------------------------- | ----- | ------------------------------------------------------------ |
+| 2020-11-19 18:02:50 UTC+0900 | ERROR | ECS Application sourcebundle validation error: AWSEBDockerrunVersion is missing. |
+
+
+
+## 배포 에러 2
+
+| 2020-11-19 18:11:29 UTC+0900 | ERROR | ECS task stopped due to: Task failed to start. (backend: nginx: frontend: ) |
+| ---------------------------- | ----- | ------------------------------------------------------------ |
+| 2020-11-19 18:11:28 UTC+0900 | ERROR | Failed to start ECS task: arn:aws:ecs:ap-northeast-2:556121139142:task/awseb-DockerFullstackApp-env-ekqrdnd3sh/7a14833862c5481bb941eff108630257 is STOPPED. |
+
+### trial1
+
+`docker-compose.yml` 파일에서 Dockerf	ile이 dev버전으로 설정되어 있는 것을 `Dockerfile로 바꾸었다. ==> 같은 에러 발생
+
+### trial2
+
+`.travis.yml`파일의 aws_access_key의 indent를 수정했다. ==> 같은 에러 발생
