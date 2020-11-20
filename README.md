@@ -166,3 +166,9 @@ frontend의 Dockerfile의 오타를 수정했다. ==> 같은 에러 발생
 | ---------------------------- | ----- | ------------------------------------------------------------ |
 | 2020-11-20 08:36:29 UTC+0900 | ERROR | Failed to deploy application.                                |
 | 2020-11-20 08:36:29 UTC+0900 | ERROR | Unsuccessful command execution on instance id(s) 'i-017317da96e79671a'. Aborting the operation. |
+
+
+
+### trial5
+
+elasticbeanstalk를 삭제하고 `rds`, `vpc`설정을 다시 해주었다. 그리고 `aws.dockerrunVersion.json`파일도 다시 설정했다.
