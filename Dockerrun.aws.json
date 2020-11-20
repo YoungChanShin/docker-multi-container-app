@@ -20,7 +20,6 @@
             "image": "chan8149/docker-nginx",
             "hostname": "nginx",
             "essential": true,
-            "memory": 128,
             "portMappings": [
                 {
                     "hostPort": 80,
@@ -30,7 +29,8 @@
             "links": [
                 "frontend",
                 "backend"
-            ]
+            ],
+            "memory": 128
         }
     ]
 }

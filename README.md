@@ -155,3 +155,14 @@ bucket_name: 소스코드를 s3에 넣은 다음 배포하는 곳에 넣어주�
 ### trial3
 
 frontend의 Dockerfile의 오타를 수정했다. ==> 같은 에러 발생
+
+### trial4
+
+`Dockerrun.aws.json`파일의 오타를 수정했다. `nginx`의 `link`를 `links`로 수정했다.
+
+새로운 에러가 발생했다.
+
+| 2020-11-20 08:36:29 UTC+0900 | ERROR | During an aborted deployment, some instances may have deployed the new application version. To ensure all instances are running the same version, re-deploy the appropriate application version. |
+| ---------------------------- | ----- | ------------------------------------------------------------ |
+| 2020-11-20 08:36:29 UTC+0900 | ERROR | Failed to deploy application.                                |
+| 2020-11-20 08:36:29 UTC+0900 | ERROR | Unsuccessful command execution on instance id(s) 'i-017317da96e79671a'. Aborting the operation. |
