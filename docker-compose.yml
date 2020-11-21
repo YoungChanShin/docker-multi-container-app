@@ -30,7 +30,7 @@ services:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: qkrwhdwo
       MYSQL_DATABASE: myapp
-      MY_PORT: 3306
+      MYSQL_PORT: 3306
       
   # mysql:
   #   build: ./mysql

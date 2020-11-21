@@ -171,4 +171,16 @@ frontend의 Dockerfile의 오타를 수정했다. ==> 같은 에러 발생
 
 ### trial5
 
-elasticbeanstalk를 삭제하고 `rds`, `vpc`설정을 다시 해주었다. 그리고 `aws.dockerrunVersion.json`파일도 다시 설정했다.
+elasticbeanstalk를 삭제하고 `rds`, `vpc`설정을 다시 해주었다. 그리고 `aws.dockerrunVersion.json`파일도 다시 설정했다. ==> 위와 같은 지점에서 실패했다.
+
+
+
+### trial6
+
+파일 이름이 겹치는 버전이 있어서 발생하는 오류라고 생각해서 `docker hub`와 s3의 `resource`를 삭제하고 실행했다. ==> 같은 에러 메세지였다. 경고 창까지 확인하니
+
+| 2020-11-20 16:34:42 UTC+0900 | WARN | Environment health has transitioned from YELLOW to RED       |
+| ---------------------------- | ---- | ------------------------------------------------------------ |
+| 2020-11-20 16:32:42 UTC+0900 | WARN | Elastic Load Balancer app/awseb-AWSEB-QH35DESZ1FEU/a4684696656a38cd has zero healthy instances. |
+
+위와 같은 경고가 확인되었다.
