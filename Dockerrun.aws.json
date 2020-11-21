@@ -3,21 +3,21 @@
     "containerDefinitions": [
         {
             "name": "frontend",
-            "image": "chan8149/docker-frontend",
+            "image": "chan8149/docker-frontend:1.0",
             "hostname": "frontend",
             "essential": false,
             "memory": 128
         },
         {
             "name": "backend",
-            "image": "chan8149/docker-backend",
+            "image": "chan8149/docker-backend:1.0",
             "hostname": "backend",
             "essential": false,
             "memory": 128
         },
         {
             "name": "nginx",
-            "image": "chan8149/docker-nginx",
+            "image": "chan8149/docker-nginx:1.0",
             "hostname": "nginx",
             "essential": true,
             "portMappings": [
