@@ -1,36 +1,36 @@
-language: generic
+# language: generic
 
-sudo: required
+# sudo: required
 
-services:
-   - docker
+# services:
+#    - docker
 
-before_install:
-   - docker build -t chan8149/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+# before_install:
+#    - docker build -t chan8149/react-test-app -f ./frontend/Dockerfile.dev ./frontend
 
-script:
-   - docker run -e CI=true chan8149/react-test-app npm run test
+# script:
+#    - docker run -e CI=true chan8149/react-test-app npm run test
 
-after_success:
-   - docker build -t chan8149/docker-frontend ./frontend
-   - docker build -t chan8149/docker-backend ./backend
-   - docker build -t chan8149/docker-nginx ./nginx
+# after_success:
+#    - docker build -t chan8149/docker-frontend ./frontend
+#    - docker build -t chan8149/docker-backend ./backend
+#    - docker build -t chan8149/docker-nginx ./nginx
 
-   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+#    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-   - docker push chan8149/docker-frontend
-   - docker push chan8149/docker-backend
-   - docker push chan8149/docker-nginx
+#    - docker push chan8149/docker-frontend
+#    - docker push chan8149/docker-backend
+#    - docker push chan8149/docker-nginx
 
-deploy:
-   provider: elasticbeanstalk
-   region: "ap-northeast-2"
-   app: "docker-fullstack-app"
-   env: "DockerFullstackApp-env"
-   bucket_name: "elasticbeanstalk-ap-northeast-2-556121139142"
-   bucket_path: "docker-fullstack-app"
-   on:
-      branch: master
+# deploy:
+#    provider: elasticbeanstalk
+#    region: "ap-northeast-2"
+#    app: "docker-fullstack-app"
+#    env: "DockerFullstackApp-env"
+#    bucket_name: "elasticbeanstalk-ap-northeast-2-556121139142"
+#    bucket_path: "docker-fullstack-app"
+#    on:
+#       branch: master
       
-   access_key_id: $AWS_ACCESS_KEY
-   secret_access_key: $AWS_SECRET_ACCESS_KEY
+#    access_key_id: $AWS_ACCESS_KEY
+#    secret_access_key: $AWS_SECRET_ACCESS_KEY
