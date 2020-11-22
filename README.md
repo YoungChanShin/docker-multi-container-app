@@ -106,7 +106,7 @@ virtual private cloud.
 
 ## RDS
 
-비밀번호: qkrwhdwo(박종재)
+
 
 
 
