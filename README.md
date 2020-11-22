@@ -126,15 +126,15 @@ bucket_name: 소스코드를 s3에 넣은 다음 배포하는 곳에 넣어주�
 
 ## 배포 에러 1
 
-```json
-// DockerrunVersion:2 에서 V를 소문자로 써서 최초에러 발생
-```
 
 에러 메세지
 
 | 2020-11-19 18:02:51 UTC+0900 | ERROR | Failed to deploy application.                                |
 | ---------------------------- | ----- | ------------------------------------------------------------ |
 | 2020-11-19 18:02:50 UTC+0900 | ERROR | ECS Application sourcebundle validation error: AWSEBDockerrunVersion is missing. |
+```json
+// DockerrunVersion:2 에서 V를 소문자로 써서 최초에러 발생
+```
 
 
 
@@ -162,6 +162,10 @@ frontend의 Dockerfile의 오타를 수정했다. ==> 같은 에러 발생
 
 새로운 에러가 발생했다.
 
+
+
+## 배포 에러3
+
 | 2020-11-20 08:36:29 UTC+0900 | ERROR | During an aborted deployment, some instances may have deployed the new application version. To ensure all instances are running the same version, re-deploy the appropriate application version. |
 | ---------------------------- | ----- | ------------------------------------------------------------ |
 | 2020-11-20 08:36:29 UTC+0900 | ERROR | Failed to deploy application.                                |
@@ -169,13 +173,13 @@ frontend의 Dockerfile의 오타를 수정했다. ==> 같은 에러 발생
 
 
 
-### trial5
+### trial1
 
 elasticbeanstalk를 삭제하고 `rds`, `vpc`설정을 다시 해주었다. 그리고 `aws.dockerrunVersion.json`파일도 다시 설정했다. ==> 위와 같은 지점에서 실패했다.
 
 
 
-### trial6
+### trial2
 
 파일 이름이 겹치는 버전이 있어서 발생하는 오류라고 생각해서 `docker hub`와 s3의 `resource`를 삭제하고 실행했다. ==> 같은 에러 메세지였다. 경고 창까지 확인하니
 
@@ -184,3 +188,44 @@ elasticbeanstalk를 삭제하고 `rds`, `vpc`설정을 다시 해주었다. 그�
 | 2020-11-20 16:32:42 UTC+0900 | WARN | Elastic Load Balancer app/awseb-AWSEB-QH35DESZ1FEU/a4684696656a38cd has zero healthy instances. |
 
 위와 같은 경고가 확인되었다.
+
+### trial3
+
+`backend/db.js`부분에 포트번호 `3306`이 없는 것을 확인했다. 그리고 다시한번 `elastic beanstalk`에 웹앱과 `RDS`, 보안그룹을 완전히 삭제하고 해보았지만 또한번 같은 에러가 나왔다.
+
+
+
+## 해결
+
+에러가 `강의의 간단한 어플을 실제로 배포해보기(테스트 & 배포 부분)`에서도 발생한 것을 보았다. 해당 에러는 nginx에 포트 개방이 누락되어 발생한 에러였다. 그래서 nginx 설정과 관련한 파일들을 다시 살펴보았다. 강의 소스과 차이는 `frontend/nginx/default.conf`에  `;`이 없는 것을 발견했다. 이 것을 수정했더니 배포에 성공했다.
+
+```conf
+upstream frontend {
+    server frontend:3000;
+}
+
+upstream backend {
+    server backend:5000;
+}
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://frontend;
+    }
+
+    location /api {
+        proxy_pass http://backend;
+    }
+
+    location /sockjs-node {
+        proxy_pass http://frontend;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+    }
+
+}
+```
+
